@@ -1,5 +1,3 @@
-
-
 const cards = document.querySelectorAll(".card");
 console.log(cards);
 
@@ -8,10 +6,7 @@ var isFlipped =false;
 var firstCard;
 var secondCard;
 
-
 cards.forEach((card)=> card.addEventListener("click",flip))
-
-
 function flip(){
 this.classList.add("flip");
 if (!isFlipped) {
@@ -22,9 +17,7 @@ else{
   secondCard=this;
   checkIt()
 }
-
 }
-
 function checkIt(){
   if (firstCard.dataset.image === secondCard.dataset.image) {
       success();
@@ -46,10 +39,7 @@ function fail(){
   secondCard.classList.remove("flip");
   reset();
   }, 500);
-  
-
-}
-
+ }
 function reset(){
   isFlipped =false;
  firstCard= null;
@@ -61,19 +51,16 @@ function shuffle(){
     card.style.order= index;
   });
 };
-const button = document.querySelector(".restart-btn")
-button.addEventListener("click",()=>{
-  restart();
-  shuffle();
-});
-
 function restart(){
-this.classList.add("flip");
-  if(!isFlipped){
-    isFlipped= false;
+cards.forEach((card)=> card.classList.remove("flip"));
+setTimeout(() => {
+  shuffle();
+  cards.forEach((card)=> card.addEventListener("click",flip))
+}, 350);
 }
-  else{isFLipped=true;}
-}
+const button = document.querySelector(".newBtn")
+button.addEventListener("click",restart);
+
 (function shuffle(){
   cards.forEach((card)=>{
     var index= Math.floor(Math.random()*16)
